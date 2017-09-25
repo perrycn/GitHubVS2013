@@ -131,13 +131,6 @@
       <DependentUpon>LibrarySiteAppModel.edmx</DependentUpon>
       <LastGenOutput>LibrarySiteAppModel.cs</LastGenOutput>
     </Content>
-    <Content Include="library.ldf">
-      <DependentUpon>library.mdf</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="library.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
