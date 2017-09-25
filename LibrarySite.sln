@@ -1,11 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2013 for Web
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibrarySite", "LibrarySite\LibrarySite.csproj", "{09D287E9-2126-45AF-991A-874DEFAE33FE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibrarySite.Tests", "LibrarySite.Tests\LibrarySite.Tests.csproj", "{D34941DA-279C-46E0-B0F0-8682662FC6A3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{97FAD87F-AF70-4D8F-8CF7-59AECF3B2D6C}"
+	ProjectSection(SolutionItems) = preProject
+		DatabaseFiles\library.ldf = DatabaseFiles\library.ldf
+		DatabaseFiles\library.mdf = DatabaseFiles\library.mdf
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
