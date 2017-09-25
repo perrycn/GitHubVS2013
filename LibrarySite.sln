@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DatabaseFiles", "DatabaseFi
 		DatabaseFiles\library.mdf = DatabaseFiles\library.mdf
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibrarySite.Data", "LibrarySite.Data\LibrarySite.Data.csproj", "{0810E142-CE74-4D79-9E80-549F4C501F6F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{D34941DA-279C-46E0-B0F0-8682662FC6A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D34941DA-279C-46E0-B0F0-8682662FC6A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D34941DA-279C-46E0-B0F0-8682662FC6A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0810E142-CE74-4D79-9E80-549F4C501F6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0810E142-CE74-4D79-9E80-549F4C501F6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0810E142-CE74-4D79-9E80-549F4C501F6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0810E142-CE74-4D79-9E80-549F4C501F6F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
