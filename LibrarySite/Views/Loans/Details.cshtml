@@ -1,0 +1,97 @@
+﻿@model LibrarySite.Models.loan
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Loan</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.out_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.out_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.due_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.due_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.copy.on_loan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.copy.on_loan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.member.lastname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.member.lastname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.member.firstname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.member.firstname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.member.member_no)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.member.member_no)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isbn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isbn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.copy_no)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.copy_no)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.title.title1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.title.title1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.title.author)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.title.author)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { isbn = Model.isbn, copy_no = Model.copy_no }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+<h2>@ViewBag.Title</h2>
+<h3>@ViewBag.Message</h3>
+
+<section>
+    <h4><strong>User Access</strong></h4>
+    <ul>
+        <li>
+            <p>Under the Library Functions menu item, the librarian has the capability to:
+                <ul>
+                    <li><strong>Add Books</strong> - enter the information on a book to be added to the library.</li>
+                    <li><strong>Check In</strong> - check in an item on loan.</li>
+                    <li><strong>Check Out</strong> - check out an item to a member.</li>
+                    <li><strong>Get/Edit/Delete Loans</strong> - view all the loans, and create (check out), edit, list details, or delete (check in) a loan</li> 
+                    <li><strong>Get/Edit/Delete Members</strong> - view all the members, and edit, list details, or delete a member.</li>
+                </ul>
+              The librarian must login and have the Librarian role to do these functions.
+            </p>
+        </li>
+        <li>
+            <p>
+                Under the Member Services menu item, the member has the capability to:
+                <ul>
+                    <li><strong>Get Member Information</strong> - gives the ability to review a member's information(member number, address, phone number, and loans).</li>
+                    <li><strong>Add Adult</strong> - add your member information (name, address, and phone number) as an adult.</li>
+                    <li><strong>Add Juvenile</strong> - add member information (name, adult member responsible, and birth day) as a juvenile.</li>
+                </ul>
+                The member must login and have the Member role to do these functions.  Under the Get Member Information, if a juvenile name is selected   
+                and he/she is 18 or older, the juvenile will automatically be converted to an adult member.  Also if an adult member expiration date has
+                expired, a button will display to allow the member to renew the expiration date.  
+            </p>
+        </li>
+    </ul>
+</section>
+

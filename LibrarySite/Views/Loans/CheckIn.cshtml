@@ -1,0 +1,81 @@
+﻿@model LibrarySite.Models.loan
+
+@{
+    ViewBag.Title = "Check In";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Loan</h4>
+        <hr />
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.isbn, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.isbn, ViewBag.isbn as SelectList, "Select ISBN...", htmlAttributes: new { @class = "form-control", @id = "ddlISBN"})
+                @Html.ValidationMessageFor(model => model.isbn, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.copy_no, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.copy_no, new SelectList(Enumerable.Empty<SelectListItem>()), htmlAttributes: new { @class = "form-control", @id = "ddlCopyNo" })
+                @Html.ValidationMessageFor(model => model.copy_no, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <label class="form-control" for="description" id="textareaDesc" style="border-style: inset; height: 200px; width: 325px;"></label>
+                @*@Html.LabelFor(model => model.description, htmlAttributes: new { @class = "form-control", @id = "textareaDesc", @style = "border-style: inset; height: 140px; width: 325px;" })*@
+                @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input id="submitBtn" type="submit" value="Yes" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to Home", "Index", "Home")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+        $("#ddlCopyNo").change(function () {
+            var isbn = $("#ddlISBN").val();
+            var copy_no = $(this).val();
+            $.getJSON("/Loans/GetLoanInfo", { isbn: isbn, copy_no: copy_no },
+                function (loanCopyInfo) {
+                   var loanInfoMsg = "";
+                   if (loanCopyInfo[0].lastname == "") {
+                       loanInfoMsg = "Title: " + loanCopyInfo[0].title + "<br />Author: " + loanCopyInfo[0].author
+                        + "<br /><br />This book is not checked out.";
+                       $("#submitBtn").attr('disabled', 'disabled');
+                   } else {
+                       loanInfoMsg = "Title: " + loanCopyInfo[0].title + "<br />Author: " + loanCopyInfo[0].author + "<br />"
+                              + "Checked out by member: " + loanCopyInfo[0].lastname + ", " + loanCopyInfo[0].firstname + " ("
+                              + loanCopyInfo[0].member_no + ")<br />Due Date: " + loanCopyInfo[0].due_date + "<br /><br />"
+                              + "Is this the book you want to check in?";
+                       $("#submitBtn").removeAttr('disabled');
+                   }
+                   $("#textareaDesc").html(loanInfoMsg);
+               });
+           });
+        });  // .ready ending
+    </script>
+}

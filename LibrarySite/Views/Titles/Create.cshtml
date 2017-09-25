@@ -1,0 +1,83 @@
+﻿@model LibrarySite.Models.TitleViewModel
+
+@{
+    ViewBag.Title = "Add Book";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    @Html.HiddenFor(model => model.isbn)
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        <div class="form-group"> 
+            <div class="col-md-2">&nbsp;&nbsp;</div>
+            <div class="col-md-10">
+                <p>The ISBN does not exist.</p>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.isbn, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.isbn)
+                @Html.ValidationMessageFor(model => model.isbn, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.author, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.author, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.author, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.translation, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.translation, DefaultValues.TranslationList, "Select Tranlation...", new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.translation, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.cover, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.RadioButtonFor(model => model.cover, "HARDBACK", new { htmlAttributes = new { @class = "form-control" } })&nbsp;HARDBACK
+                @Html.RadioButtonFor(model => model.cover, "SOFTBACK", new { htmlAttributes = new { @class = "form-control" } })&nbsp;SOFTBACK
+                @Html.ValidationMessageFor(model => model.cover, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.loanable, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.RadioButtonFor(model => model.loanable, "Y", new { htmlAttributes = new { @class = "form-control" } })&nbsp;Yes
+                @Html.RadioButtonFor(model => model.loanable, "N", new { htmlAttributes = new { @class = "form-control" } })&nbsp;No
+                @Html.ValidationMessageFor(model => model.loanable, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Add Book" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to Home", "Index", "Home")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

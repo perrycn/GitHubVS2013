@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Perry's Public Library</title>
+    @Styles.Render("~/Content/themes/base/css")
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body style="margin-top: 0px">
+    <div id="image-container">
+        <header class="image-header">
+            <img class="banner" src="~/Images/banner reading for knowledge150hreviseda.jpg" alt="Perry Public Library Banner Image" />
+        </header>
+    </div>
+    <div class="navbar navbar-inverse navbar-margin">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Library Site", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    @{bool Librarian = User.IsInRole("Librarian");}
+                    @if (Librarian)
+                    {
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Library Functions
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Add Book", "CheckISBNExists", "Items")</li>
+                                <li>@Html.ActionLink("Check In", "CheckIn", "Loans")</li>
+                                <li>@Html.ActionLink("Check Out", "CheckOut", "Loans")</li>
+                                <li>@Html.ActionLink("Get/Edit/Delete Loans", "Index", "Loans")</li>
+                                <li>@Html.ActionLink("Get/Edit/Delete Members", "Index", "members")</li>
+                            </ul>
+                        </li>
+                    }
+                    @if (User.IsInRole("Member") || Librarian)
+                    {
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Member Services
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Get Member Information", "GetMemberInfo", "members")</li>
+                                <li>@Html.ActionLink("Add Adult", "CreateAdult", "members")</li>
+                                <li>@Html.ActionLink("Add Juvenile", "CreateJuvenile", "members")</li>
+                            </ul>
+                        </li>
+                    }
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+
+    <div id="bodyContent" class="container body-content">
+        <div id="msgArea">
+            @if (TempData["UserMessageSuccess"] != null)
+            {
+                <div id="alertMsg" class="alert alert-success">
+                    <strong>Success!</strong> @TempData["UserMessageSuccess"]
+                </div>
+            }
+            @if (TempData["UserMessageError"] != null)
+            {
+                <div id="alertMsg" class="alert alert-danger">
+                    <strong>Error!</strong> @TempData["UserMessageError"]
+                </div>
+            }
+        </div>
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Perry Public Library</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/lib")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

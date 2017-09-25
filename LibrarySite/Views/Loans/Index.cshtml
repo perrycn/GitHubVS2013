@@ -1,0 +1,69 @@
+﻿@model IEnumerable<LibrarySite.Models.loan>
+
+@{
+    ViewBag.Title = "Loans";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CheckOut")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.out_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.due_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.copy.on_loan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.member.lastname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.member.firstname)
+        </th>
+        <th>
+            Mbr. No.
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.title.title1)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.out_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.due_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.copy.on_loan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.member.lastname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.member.firstname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.member.member_no)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.title.title1)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { isbn = item.isbn, copy_no = item.copy_no }) |
+            @Html.ActionLink("Details", "Details", new { isbn = item.isbn, copy_no = item.copy_no }) |
+            @Html.ActionLink("Delete", "Delete", new { isbn = item.isbn, copy_no = item.copy_no })
+        </td>
+    </tr>
+}
+
+</table>

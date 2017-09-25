@@ -1,0 +1,119 @@
+﻿@model LibrarySite.Models.loan
+
+@{
+    ViewBag.Title = "Check Out";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Loan</h4>
+        <hr />
+        <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
+        @Html.Hidden("title_no")
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.member, "Member", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.member_no, ViewBag.members as SelectList, "Select Member...", htmlAttributes: new { @class = "form-control", @id = "ddlMember"})
+                @Html.ValidationMessageFor(model => model.member_no, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.isbn, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.isbn, new SelectList(Enumerable.Empty<SelectListItem>()), htmlAttributes: new { @class = "form-control", @id = "ddlISBN"})
+                @Html.ValidationMessageFor(model => model.isbn, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.copy_no, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.copy_no, new SelectList(Enumerable.Empty<SelectListItem>()), htmlAttributes: new { @class = "form-control", @id = "ddlCopyNo" })
+                @Html.ValidationMessageFor(model => model.copy_no, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <label class="form-control" for="description" id="textareaDesc" style="border-style: inset; height: 200px; width: 325px;"></label>
+                @*@Html.LabelFor(model => model.description, htmlAttributes: new { @class = "form-control", @id = "textareaDesc", @style = "border-style: inset; height: 140px; width: 325px;" })*@
+                @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Yes" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to Previous Page", null, null, null, new { href = @ViewBag.returnUrl })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+        $("#ddlMember").val("");
+        $("#ddlMember").change(function () {
+            var member_no = $(this).val();
+            $.getJSON("/Loans/ReachedCheckOutItemExprDateLimit", { member_no: member_no },
+                function (reachedLimitMsg) {
+                    if (reachedLimitMsg) {
+                        $("#textareaDesc").html(reachedLimitMsg);
+                        $("input[type=submit]").attr("disabled", "disabled");
+                    } else {
+                        $("input[type=submit]").removeAttr("disabled");
+                        $("#textareaDesc").html("");
+                        $.getJSON("/Loans/GetLoanableISBNList", { },
+                            function (isbnList) {
+                                var select = $("#ddlISBN");
+                                select.empty();
+                                select.append($('<option/>', {
+                                value: 0,
+                                text: "Select an ISBN"
+                            }));
+                            $.each(isbnList, function (index, itemData) {
+                                select.append($('<option/>', {
+                                    value: itemData.Value,
+                                    text: itemData.Text
+                                }));
+                            });
+                        });  // .getJSON ending
+                    }  // end of else
+               });  // .getJSON ReachedCheckOutItemLimit ending
+        });  // .change ending
+        $("#ddlCopyNo").change(function () {
+            var isbn = $("#ddlISBN").val();
+            var copy_no = $(this).val();
+            $.getJSON("/Loans/GetLoanInfo", { isbn: isbn, copy_no: copy_no },
+                function (loanCopyInfo) {
+                   var loanInfoMsg = "";                   
+                   if (loanCopyInfo[0].lastname == "") {
+                       loanInfoMsg = "Title: " + loanCopyInfo[0].title + "<br />Author: " + loanCopyInfo[0].author
+                        + "<br /><br />Is this the book you want to check out?";
+                   } else {
+                       loanInfoMsg = "Title: " + loanCopyInfo[0].title + "<br />Author: " + loanCopyInfo[0].author + "<br />"
+                              + "Checked out by member: " + loanCopyInfo[0].lastname + ", " + loanCopyInfo[0].firstname + " ("
+                              + loanCopyInfo[0].member_no + ")<br />Due Date: " + loanCopyInfo[0].due_date + "<br /><br />"
+                              + "This book is already checked out. Do you want to check in and then check out?";
+                   }
+                   $("#title_no").val(loanCopyInfo[0].title_no);
+                   $("#textareaDesc").html(loanInfoMsg);                  
+            });
+        });
+    });  // .ready ending
+</script>
+}

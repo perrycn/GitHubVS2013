@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0810E142-CE74-4D79-9E80-549F4C501F6F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LibrarySite.Data</RootNamespace>
+    <AssemblyName>LibrarySite.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DAL\adult.cs">
+      <DependentUpon>LibrarySiteAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\AspNetRole.cs">
+      <DependentUpon>LibrarySiteAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\AspNetUser.cs">
+      <DependentUpon>LibrarySiteAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\AspNetUserClaim.cs">
+      <DependentUpon>LibrarySiteAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\AspNetUserLogin.cs">
+      <DependentUpon>LibrarySiteAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\copy.cs">
+      <DependentUpon>LibrarySiteAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\C__MigrationHistory.cs">
+      <DependentUpon>LibrarySiteAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\item.cs">
+      <DependentUpon>LibrarySiteAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\juvenile.cs">
+      <DependentUpon>LibrarySiteAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\LibrarySiteAppModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LibrarySiteAppModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\LibrarySiteAppModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LibrarySiteAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\LibrarySiteAppModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LibrarySiteAppModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\loan.cs">
+      <DependentUpon>LibrarySiteAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\loanhist.cs">
+      <DependentUpon>LibrarySiteAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\member.cs">
+      <DependentUpon>LibrarySiteAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\reservation.cs">
+      <DependentUpon>LibrarySiteAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\title.cs">
+      <DependentUpon>LibrarySiteAppModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="DAL\LibrarySiteAppModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>LibrarySiteAppModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="DAL\LibrarySiteAppModel.edmx.diagram">
+      <DependentUpon>LibrarySiteAppModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DAL\LibrarySiteAppModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LibrarySiteAppModel.edmx</DependentUpon>
+      <LastGenOutput>LibrarySiteAppModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DAL\LibrarySiteAppModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LibrarySiteAppModel.edmx</DependentUpon>
+      <LastGenOutput>LibrarySiteAppModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

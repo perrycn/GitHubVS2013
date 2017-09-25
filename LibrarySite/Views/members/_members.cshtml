@@ -1,0 +1,63 @@
+﻿@model PagedList.IPagedList<LibrarySite.Models.member>
+@using PagedList.Mvc;
+
+        <div id="memberList">
+            <div class="pagedList" data-lib-target="#memberList">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { searchTerm = Session["searchTerm"], page, pageSize = Session["pageSize"] })) 
+                Showing @Model.FirstItemOnPage to @Model.LastItemOnPage of @Model.TotalItemCount Members
+            </div>
+
+            <table class="table">
+                <tr>
+                    <th>
+                        Last Name
+                    </th>
+                    <th>
+                        First Name
+                    </th>
+                    <th>
+                        Middle Initial
+                    </th>
+                    <th>
+                        Member No.
+                    </th>
+                    <th>
+                        Member Type
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.lastname)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.firstname)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.middleinitial)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.member_no)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.member_type)
+                        </td>
+                        <td>
+                           @if (item.member_type == "Adult")
+                           {
+                               @Html.ActionLink("Edit", "EditAdult", new { id = item.member_no })
+                            } else {
+                               @Html.ActionLink("Edit", "EditJuvenile", new { id = item.member_no }) 
+                            } |
+                            @Html.ActionLink("Details", "Details", new { id = item.member_no }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.member_no })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+

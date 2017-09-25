@@ -1,0 +1,50 @@
+﻿@model LibrarySite.Models.copy
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>copy</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.on_loan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.on_loan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.item.translation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.item.translation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.title.title1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.title.title1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.loan.isbn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.loan.isbn)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

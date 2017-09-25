@@ -1,0 +1,65 @@
+﻿@model List<LibrarySite.Models.member>
+
+    @{
+        ViewBag.Title = "Member Information";
+    }
+
+    <h2>@ViewBag.Title</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Member</h4>
+            <hr />
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.Label("member_no", "Member", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("member_no", ViewBag.members as SelectList, "Select Member...", htmlAttributes: new { @class = "form-control", @id = "ddlMember" })
+                    @Html.ValidationMessage("member_no", "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        @Html.Partial("_memberLoans", Model)
+    }
+    <br />
+    <div>
+        @Html.ActionLink("Back to Home", "Index", "Home")
+    </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#ddlMember").change(function () {
+            var input_no = $(this).val();
+            $("#msgArea").empty();
+            $(".validation-summary-errors").empty();
+            var options = {
+                url: "@Url.Action("GetMemberInfo")",
+                type: "GET",
+                data: { member_no: input_no }
+            };
+
+            $.ajax(options).done(function (data) {
+                var $target = $("#memberloanInfo");
+                var $newHtml = $(data);
+                $target.replaceWith($newHtml);
+            });
+
+            return false;
+        });
+        $("tr td:nth-child(6)").each(function () {
+            var duedate = Date.parse($(this).text());
+            var currentdate = new Date();
+            if (duedate < currentdate) {
+                $(this).parent("tr").css("background-color", "yellow");
+            }
+        });
+    });  // .ready ending
+</script>
+}

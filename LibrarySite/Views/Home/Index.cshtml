@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row text-center">
+    <img src=" ~/Images/CollinsLibrevised0b.jpg" style="max-width:800px;" width="100%" height="100%" />
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="rectheader">
+            Online Collection
+        </div>
+        <div class="rect">
+            <ul class="a">
+                <li>@Html.ActionLink("Card Catalog", "Index", "Home")</li>
+                <li>@Html.ActionLink("New Books", "Index", "Home")</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="rectheader">
+            Events
+        </div>
+        <div class="rect">
+            <ul class="a">
+                <li><a href="#">Calendar of Events</a></li>
+                <li><a href="#">Computer Classes</a></li>
+                <li><a href="#">Tax Forms</a></li>
+                <li><a href="#">Christmas Party</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="rectheader">
+            Hours
+        </div>
+        <div class="rect">
+            <ul class="a">
+                <li><span class="b">Sunday - 1:00pm - 5:00pm</span></li>
+                <li><span class="b">Monday thru Thursday - 9:00am - 8:00pm</span></li>
+                <li><span class="b">Friday and Saturday - 9:00am - 5:00pm</span></li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,1136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="libraryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="adult">
+          <Key>
+            <PropertyRef Name="member_no" />
+          </Key>
+          <Property Name="member_no" Type="smallint" Nullable="false" />
+          <Property Name="street" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="city" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="state" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="zip" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="phone_no" Type="char" MaxLength="13" />
+          <Property Name="expr_date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Hometown" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="copy">
+          <Key>
+            <PropertyRef Name="isbn" />
+            <PropertyRef Name="copy_no" />
+          </Key>
+          <Property Name="isbn" Type="int" Nullable="false" />
+          <Property Name="copy_no" Type="smallint" Nullable="false" />
+          <Property Name="title_no" Type="int" Nullable="false" />
+          <Property Name="on_loan" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="item">
+          <Key>
+            <PropertyRef Name="isbn" />
+          </Key>
+          <Property Name="isbn" Type="int" Nullable="false" />
+          <Property Name="title_no" Type="int" Nullable="false" />
+          <Property Name="translation" Type="char" MaxLength="8" />
+          <Property Name="cover" Type="char" MaxLength="8" />
+          <Property Name="loanable" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="juvenile">
+          <Key>
+            <PropertyRef Name="member_no" />
+          </Key>
+          <Property Name="member_no" Type="smallint" Nullable="false" />
+          <Property Name="adult_member_no" Type="smallint" Nullable="false" />
+          <Property Name="birth_date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="loan">
+          <Key>
+            <PropertyRef Name="isbn" />
+            <PropertyRef Name="copy_no" />
+          </Key>
+          <Property Name="isbn" Type="int" Nullable="false" />
+          <Property Name="copy_no" Type="smallint" Nullable="false" />
+          <Property Name="title_no" Type="int" Nullable="false" />
+          <Property Name="member_no" Type="smallint" Nullable="false" />
+          <Property Name="out_date" Type="datetime" Nullable="false" />
+          <Property Name="due_date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="loanhist">
+          <Key>
+            <PropertyRef Name="isbn" />
+            <PropertyRef Name="copy_no" />
+            <PropertyRef Name="out_date" />
+          </Key>
+          <Property Name="isbn" Type="int" Nullable="false" />
+          <Property Name="copy_no" Type="smallint" Nullable="false" />
+          <Property Name="out_date" Type="datetime" Nullable="false" />
+          <Property Name="title_no" Type="int" Nullable="false" />
+          <Property Name="member_no" Type="smallint" Nullable="false" />
+          <Property Name="due_date" Type="datetime" />
+          <Property Name="in_date" Type="datetime" />
+          <Property Name="fine_assessed" Type="money" />
+          <Property Name="fine_paid" Type="money" />
+          <Property Name="fine_waived" Type="money" />
+          <Property Name="remarks" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="member">
+          <Key>
+            <PropertyRef Name="member_no" />
+          </Key>
+          <Property Name="member_no" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="lastname" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="firstname" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="middleinitial" Type="char" MaxLength="1" />
+          <Property Name="photograph" Type="image" />
+        </EntityType>
+        <EntityType Name="reservation">
+          <Key>
+            <PropertyRef Name="isbn" />
+            <PropertyRef Name="member_no" />
+          </Key>
+          <Property Name="isbn" Type="int" Nullable="false" />
+          <Property Name="member_no" Type="smallint" Nullable="false" />
+          <Property Name="log_date" Type="datetime" />
+          <Property Name="remarks" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="title">
+          <Key>
+            <PropertyRef Name="title_no" />
+          </Key>
+          <Property Name="title_no" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="63" Nullable="false" />
+          <Property Name="author" Type="varchar" MaxLength="31" Nullable="false" />
+          <Property Name="synopsis" Type="text" />
+        </EntityType>
+        <Association Name="adult_member_link">
+          <End Role="member" Type="Self.member" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="adult" Type="Self.adult" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="member_no" />
+            </Principal>
+            <Dependent Role="adult">
+              <PropertyRef Name="member_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="copy_item_link">
+          <End Role="item" Type="Self.item" Multiplicity="1" />
+          <End Role="copy" Type="Self.copy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="item">
+              <PropertyRef Name="isbn" />
+            </Principal>
+            <Dependent Role="copy">
+              <PropertyRef Name="isbn" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="copy_title_link">
+          <End Role="title" Type="Self.title" Multiplicity="1" />
+          <End Role="copy" Type="Self.copy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="title">
+              <PropertyRef Name="title_no" />
+            </Principal>
+            <Dependent Role="copy">
+              <PropertyRef Name="title_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="item_title_link">
+          <End Role="title" Type="Self.title" Multiplicity="1" />
+          <End Role="item" Type="Self.item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="title">
+              <PropertyRef Name="title_no" />
+            </Principal>
+            <Dependent Role="item">
+              <PropertyRef Name="title_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="juvenile_adult_link">
+          <End Role="adult" Type="Self.adult" Multiplicity="1" />
+          <End Role="juvenile" Type="Self.juvenile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="adult">
+              <PropertyRef Name="member_no" />
+            </Principal>
+            <Dependent Role="juvenile">
+              <PropertyRef Name="adult_member_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="juvenile_member_link">
+          <End Role="member" Type="Self.member" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="juvenile" Type="Self.juvenile" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="member_no" />
+            </Principal>
+            <Dependent Role="juvenile">
+              <PropertyRef Name="member_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="loan_copy_link">
+          <End Role="copy" Type="Self.copy" Multiplicity="1" />
+          <End Role="loan" Type="Self.loan" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="copy">
+              <PropertyRef Name="isbn" />
+              <PropertyRef Name="copy_no" />
+            </Principal>
+            <Dependent Role="loan">
+              <PropertyRef Name="isbn" />
+              <PropertyRef Name="copy_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="loan_member_link">
+          <End Role="member" Type="Self.member" Multiplicity="1" />
+          <End Role="loan" Type="Self.loan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="member_no" />
+            </Principal>
+            <Dependent Role="loan">
+              <PropertyRef Name="member_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="loan_title_link">
+          <End Role="title" Type="Self.title" Multiplicity="1" />
+          <End Role="loan" Type="Self.loan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="title">
+              <PropertyRef Name="title_no" />
+            </Principal>
+            <Dependent Role="loan">
+              <PropertyRef Name="title_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="loanhist_copy_link">
+          <End Role="copy" Type="Self.copy" Multiplicity="1" />
+          <End Role="loanhist" Type="Self.loanhist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="copy">
+              <PropertyRef Name="isbn" />
+              <PropertyRef Name="copy_no" />
+            </Principal>
+            <Dependent Role="loanhist">
+              <PropertyRef Name="isbn" />
+              <PropertyRef Name="copy_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="loanhist_title_link">
+          <End Role="title" Type="Self.title" Multiplicity="1" />
+          <End Role="loanhist" Type="Self.loanhist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="title">
+              <PropertyRef Name="title_no" />
+            </Principal>
+            <Dependent Role="loanhist">
+              <PropertyRef Name="title_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="reservation_item_link">
+          <End Role="item" Type="Self.item" Multiplicity="1" />
+          <End Role="reservation" Type="Self.reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="item">
+              <PropertyRef Name="isbn" />
+            </Principal>
+            <Dependent Role="reservation">
+              <PropertyRef Name="isbn" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="reservation_member_link">
+          <End Role="member" Type="Self.member" Multiplicity="1" />
+          <End Role="reservation" Type="Self.reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="member_no" />
+            </Principal>
+            <Dependent Role="reservation">
+              <PropertyRef Name="member_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="libraryModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="adult" EntityType="Self.adult" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="copy" EntityType="Self.copy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="item" EntityType="Self.item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="juvenile" EntityType="Self.juvenile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="loan" EntityType="Self.loan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="loanhist" EntityType="Self.loanhist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="member" EntityType="Self.member" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="reservation" EntityType="Self.reservation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="title" EntityType="Self.title" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="adult_member_link" Association="Self.adult_member_link">
+            <End Role="member" EntitySet="member" />
+            <End Role="adult" EntitySet="adult" />
+          </AssociationSet>
+          <AssociationSet Name="copy_item_link" Association="Self.copy_item_link">
+            <End Role="item" EntitySet="item" />
+            <End Role="copy" EntitySet="copy" />
+          </AssociationSet>
+          <AssociationSet Name="copy_title_link" Association="Self.copy_title_link">
+            <End Role="title" EntitySet="title" />
+            <End Role="copy" EntitySet="copy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="item_title_link" Association="Self.item_title_link">
+            <End Role="title" EntitySet="title" />
+            <End Role="item" EntitySet="item" />
+          </AssociationSet>
+          <AssociationSet Name="juvenile_adult_link" Association="Self.juvenile_adult_link">
+            <End Role="adult" EntitySet="adult" />
+            <End Role="juvenile" EntitySet="juvenile" />
+          </AssociationSet>
+          <AssociationSet Name="juvenile_member_link" Association="Self.juvenile_member_link">
+            <End Role="member" EntitySet="member" />
+            <End Role="juvenile" EntitySet="juvenile" />
+          </AssociationSet>
+          <AssociationSet Name="loan_copy_link" Association="Self.loan_copy_link">
+            <End Role="copy" EntitySet="copy" />
+            <End Role="loan" EntitySet="loan" />
+          </AssociationSet>
+          <AssociationSet Name="loan_member_link" Association="Self.loan_member_link">
+            <End Role="member" EntitySet="member" />
+            <End Role="loan" EntitySet="loan" />
+          </AssociationSet>
+          <AssociationSet Name="loan_title_link" Association="Self.loan_title_link">
+            <End Role="title" EntitySet="title" />
+            <End Role="loan" EntitySet="loan" />
+          </AssociationSet>
+          <AssociationSet Name="loanhist_copy_link" Association="Self.loanhist_copy_link">
+            <End Role="copy" EntitySet="copy" />
+            <End Role="loanhist" EntitySet="loanhist" />
+          </AssociationSet>
+          <AssociationSet Name="loanhist_title_link" Association="Self.loanhist_title_link">
+            <End Role="title" EntitySet="title" />
+            <End Role="loanhist" EntitySet="loanhist" />
+          </AssociationSet>
+          <AssociationSet Name="reservation_item_link" Association="Self.reservation_item_link">
+            <End Role="item" EntitySet="item" />
+            <End Role="reservation" EntitySet="reservation" />
+          </AssociationSet>
+          <AssociationSet Name="reservation_member_link" Association="Self.reservation_member_link">
+            <End Role="member" EntitySet="member" />
+            <End Role="reservation" EntitySet="reservation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="libraryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="adult">
+          <Key>
+            <PropertyRef Name="member_no" />
+          </Key>
+          <Property Name="member_no" Type="Int16" Nullable="false" />
+          <Property Name="street" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="city" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="state" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="zip" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="phone_no" Type="String" MaxLength="13" FixedLength="true" Unicode="false" />
+          <Property Name="expr_date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="member" Relationship="Self.adult_member_link" FromRole="adult" ToRole="member" />
+          <NavigationProperty Name="juveniles" Relationship="Self.juvenile_adult_link" FromRole="adult" ToRole="juvenile" />
+        </EntityType>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Hometown" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <EntityType Name="copy">
+          <Key>
+            <PropertyRef Name="isbn" />
+            <PropertyRef Name="copy_no" />
+          </Key>
+          <Property Name="isbn" Type="Int32" Nullable="false" />
+          <Property Name="copy_no" Type="Int16" Nullable="false" />
+          <Property Name="title_no" Type="Int32" Nullable="false" />
+          <Property Name="on_loan" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="item" Relationship="Self.copy_item_link" FromRole="copy" ToRole="item" />
+          <NavigationProperty Name="title" Relationship="Self.copy_title_link" FromRole="copy" ToRole="title" />
+          <NavigationProperty Name="loan" Relationship="Self.loan_copy_link" FromRole="copy" ToRole="loan" />
+          <NavigationProperty Name="loanhists" Relationship="Self.loanhist_copy_link" FromRole="copy" ToRole="loanhist" />
+        </EntityType>
+        <EntityType Name="item">
+          <Key>
+            <PropertyRef Name="isbn" />
+          </Key>
+          <Property Name="isbn" Type="Int32" Nullable="false" />
+          <Property Name="title_no" Type="Int32" Nullable="false" />
+          <Property Name="translation" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Name="cover" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Name="loanable" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="copies" Relationship="Self.copy_item_link" FromRole="item" ToRole="copy" />
+          <NavigationProperty Name="title" Relationship="Self.item_title_link" FromRole="item" ToRole="title" />
+          <NavigationProperty Name="reservations" Relationship="Self.reservation_item_link" FromRole="item" ToRole="reservation" />
+        </EntityType>
+        <EntityType Name="juvenile">
+          <Key>
+            <PropertyRef Name="member_no" />
+          </Key>
+          <Property Name="member_no" Type="Int16" Nullable="false" />
+          <Property Name="adult_member_no" Type="Int16" Nullable="false" />
+          <Property Name="birth_date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="adult" Relationship="Self.juvenile_adult_link" FromRole="juvenile" ToRole="adult" />
+          <NavigationProperty Name="member" Relationship="Self.juvenile_member_link" FromRole="juvenile" ToRole="member" />
+        </EntityType>
+        <EntityType Name="loan">
+          <Key>
+            <PropertyRef Name="isbn" />
+            <PropertyRef Name="copy_no" />
+          </Key>
+          <Property Name="isbn" Type="Int32" Nullable="false" />
+          <Property Name="copy_no" Type="Int16" Nullable="false" />
+          <Property Name="title_no" Type="Int32" Nullable="false" />
+          <Property Name="member_no" Type="Int16" Nullable="false" />
+          <Property Name="out_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="due_date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="copy" Relationship="Self.loan_copy_link" FromRole="loan" ToRole="copy" />
+          <NavigationProperty Name="member" Relationship="Self.loan_member_link" FromRole="loan" ToRole="member" />
+          <NavigationProperty Name="title" Relationship="Self.loan_title_link" FromRole="loan" ToRole="title" />
+        </EntityType>
+        <EntityType Name="loanhist">
+          <Key>
+            <PropertyRef Name="isbn" />
+            <PropertyRef Name="copy_no" />
+            <PropertyRef Name="out_date" />
+          </Key>
+          <Property Name="isbn" Type="Int32" Nullable="false" />
+          <Property Name="copy_no" Type="Int16" Nullable="false" />
+          <Property Name="out_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="title_no" Type="Int32" Nullable="false" />
+          <Property Name="member_no" Type="Int16" Nullable="false" />
+          <Property Name="due_date" Type="DateTime" Precision="3" />
+          <Property Name="in_date" Type="DateTime" Precision="3" />
+          <Property Name="fine_assessed" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="fine_paid" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="fine_waived" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="remarks" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="copy" Relationship="Self.loanhist_copy_link" FromRole="loanhist" ToRole="copy" />
+          <NavigationProperty Name="title" Relationship="Self.loanhist_title_link" FromRole="loanhist" ToRole="title" />
+        </EntityType>
+        <EntityType Name="member">
+          <Key>
+            <PropertyRef Name="member_no" />
+          </Key>
+          <Property Name="member_no" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="lastname" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="firstname" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="middleinitial" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="photograph" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="adult" Relationship="Self.adult_member_link" FromRole="member" ToRole="adult" />
+          <NavigationProperty Name="juvenile" Relationship="Self.juvenile_member_link" FromRole="member" ToRole="juvenile" />
+          <NavigationProperty Name="loans" Relationship="Self.loan_member_link" FromRole="member" ToRole="loan" />
+          <NavigationProperty Name="reservations" Relationship="Self.reservation_member_link" FromRole="member" ToRole="reservation" />
+        </EntityType>
+        <EntityType Name="reservation">
+          <Key>
+            <PropertyRef Name="isbn" />
+            <PropertyRef Name="member_no" />
+          </Key>
+          <Property Name="isbn" Type="Int32" Nullable="false" />
+          <Property Name="member_no" Type="Int16" Nullable="false" />
+          <Property Name="log_date" Type="DateTime" Precision="3" />
+          <Property Name="remarks" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="item" Relationship="Self.reservation_item_link" FromRole="reservation" ToRole="item" />
+          <NavigationProperty Name="member" Relationship="Self.reservation_member_link" FromRole="reservation" ToRole="member" />
+        </EntityType>
+        <EntityType Name="title">
+          <Key>
+            <PropertyRef Name="title_no" />
+          </Key>
+          <Property Name="title_no" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title1" Type="String" MaxLength="63" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="author" Type="String" MaxLength="31" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="synopsis" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="copies" Relationship="Self.copy_title_link" FromRole="title" ToRole="copy" />
+          <NavigationProperty Name="items" Relationship="Self.item_title_link" FromRole="title" ToRole="item" />
+          <NavigationProperty Name="loans" Relationship="Self.loan_title_link" FromRole="title" ToRole="loan" />
+          <NavigationProperty Name="loanhists" Relationship="Self.loanhist_title_link" FromRole="title" ToRole="loanhist" />
+        </EntityType>
+        <Association Name="adult_member_link">
+          <End Role="member" Type="Self.member" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="adult" Type="Self.adult" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="member_no" />
+            </Principal>
+            <Dependent Role="adult">
+              <PropertyRef Name="member_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="juvenile_adult_link">
+          <End Role="adult" Type="Self.adult" Multiplicity="1" />
+          <End Role="juvenile" Type="Self.juvenile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="adult">
+              <PropertyRef Name="member_no" />
+            </Principal>
+            <Dependent Role="juvenile">
+              <PropertyRef Name="adult_member_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="copy_item_link">
+          <End Role="item" Type="Self.item" Multiplicity="1" />
+          <End Role="copy" Type="Self.copy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="item">
+              <PropertyRef Name="isbn" />
+            </Principal>
+            <Dependent Role="copy">
+              <PropertyRef Name="isbn" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="copy_title_link">
+          <End Role="title" Type="Self.title" Multiplicity="1" />
+          <End Role="copy" Type="Self.copy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="title">
+              <PropertyRef Name="title_no" />
+            </Principal>
+            <Dependent Role="copy">
+              <PropertyRef Name="title_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="loan_copy_link">
+          <End Role="copy" Type="Self.copy" Multiplicity="1" />
+          <End Role="loan" Type="Self.loan" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="copy">
+              <PropertyRef Name="isbn" />
+              <PropertyRef Name="copy_no" />
+            </Principal>
+            <Dependent Role="loan">
+              <PropertyRef Name="isbn" />
+              <PropertyRef Name="copy_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="loanhist_copy_link">
+          <End Role="copy" Type="Self.copy" Multiplicity="1" />
+          <End Role="loanhist" Type="Self.loanhist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="copy">
+              <PropertyRef Name="isbn" />
+              <PropertyRef Name="copy_no" />
+            </Principal>
+            <Dependent Role="loanhist">
+              <PropertyRef Name="isbn" />
+              <PropertyRef Name="copy_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="item_title_link">
+          <End Role="title" Type="Self.title" Multiplicity="1" />
+          <End Role="item" Type="Self.item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="title">
+              <PropertyRef Name="title_no" />
+            </Principal>
+            <Dependent Role="item">
+              <PropertyRef Name="title_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="reservation_item_link">
+          <End Role="item" Type="Self.item" Multiplicity="1" />
+          <End Role="reservation" Type="Self.reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="item">
+              <PropertyRef Name="isbn" />
+            </Principal>
+            <Dependent Role="reservation">
+              <PropertyRef Name="isbn" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="juvenile_member_link">
+          <End Role="member" Type="Self.member" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="juvenile" Type="Self.juvenile" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="member_no" />
+            </Principal>
+            <Dependent Role="juvenile">
+              <PropertyRef Name="member_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="loan_member_link">
+          <End Role="member" Type="Self.member" Multiplicity="1" />
+          <End Role="loan" Type="Self.loan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="member_no" />
+            </Principal>
+            <Dependent Role="loan">
+              <PropertyRef Name="member_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="loan_title_link">
+          <End Role="title" Type="Self.title" Multiplicity="1" />
+          <End Role="loan" Type="Self.loan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="title">
+              <PropertyRef Name="title_no" />
+            </Principal>
+            <Dependent Role="loan">
+              <PropertyRef Name="title_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="loanhist_title_link">
+          <End Role="title" Type="Self.title" Multiplicity="1" />
+          <End Role="loanhist" Type="Self.loanhist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="title">
+              <PropertyRef Name="title_no" />
+            </Principal>
+            <Dependent Role="loanhist">
+              <PropertyRef Name="title_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="reservation_member_link">
+          <End Role="member" Type="Self.member" Multiplicity="1" />
+          <End Role="reservation" Type="Self.reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="member_no" />
+            </Principal>
+            <Dependent Role="reservation">
+              <PropertyRef Name="member_no" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="libraryEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="adults" EntityType="Self.adult" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <EntitySet Name="copies" EntityType="Self.copy" />
+          <EntitySet Name="items" EntityType="Self.item" />
+          <EntitySet Name="juveniles" EntityType="Self.juvenile" />
+          <EntitySet Name="loans" EntityType="Self.loan" />
+          <EntitySet Name="loanhists" EntityType="Self.loanhist" />
+          <EntitySet Name="members" EntityType="Self.member" />
+          <EntitySet Name="reservations" EntityType="Self.reservation" />
+          <EntitySet Name="titles" EntityType="Self.title" />
+          <AssociationSet Name="adult_member_link" Association="Self.adult_member_link">
+            <End Role="member" EntitySet="members" />
+            <End Role="adult" EntitySet="adults" />
+          </AssociationSet>
+          <AssociationSet Name="juvenile_adult_link" Association="Self.juvenile_adult_link">
+            <End Role="adult" EntitySet="adults" />
+            <End Role="juvenile" EntitySet="juveniles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="copy_item_link" Association="Self.copy_item_link">
+            <End Role="item" EntitySet="items" />
+            <End Role="copy" EntitySet="copies" />
+          </AssociationSet>
+          <AssociationSet Name="copy_title_link" Association="Self.copy_title_link">
+            <End Role="title" EntitySet="titles" />
+            <End Role="copy" EntitySet="copies" />
+          </AssociationSet>
+          <AssociationSet Name="loan_copy_link" Association="Self.loan_copy_link">
+            <End Role="copy" EntitySet="copies" />
+            <End Role="loan" EntitySet="loans" />
+          </AssociationSet>
+          <AssociationSet Name="loanhist_copy_link" Association="Self.loanhist_copy_link">
+            <End Role="copy" EntitySet="copies" />
+            <End Role="loanhist" EntitySet="loanhists" />
+          </AssociationSet>
+          <AssociationSet Name="item_title_link" Association="Self.item_title_link">
+            <End Role="title" EntitySet="titles" />
+            <End Role="item" EntitySet="items" />
+          </AssociationSet>
+          <AssociationSet Name="reservation_item_link" Association="Self.reservation_item_link">
+            <End Role="item" EntitySet="items" />
+            <End Role="reservation" EntitySet="reservations" />
+          </AssociationSet>
+          <AssociationSet Name="juvenile_member_link" Association="Self.juvenile_member_link">
+            <End Role="member" EntitySet="members" />
+            <End Role="juvenile" EntitySet="juveniles" />
+          </AssociationSet>
+          <AssociationSet Name="loan_member_link" Association="Self.loan_member_link">
+            <End Role="member" EntitySet="members" />
+            <End Role="loan" EntitySet="loans" />
+          </AssociationSet>
+          <AssociationSet Name="loan_title_link" Association="Self.loan_title_link">
+            <End Role="title" EntitySet="titles" />
+            <End Role="loan" EntitySet="loans" />
+          </AssociationSet>
+          <AssociationSet Name="loanhist_title_link" Association="Self.loanhist_title_link">
+            <End Role="title" EntitySet="titles" />
+            <End Role="loanhist" EntitySet="loanhists" />
+          </AssociationSet>
+          <AssociationSet Name="reservation_member_link" Association="Self.reservation_member_link">
+            <End Role="member" EntitySet="members" />
+            <End Role="reservation" EntitySet="reservations" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="libraryModelStoreContainer" CdmEntityContainer="libraryEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="libraryModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="adults">
+            <EntityTypeMapping TypeName="libraryModel.adult">
+              <MappingFragment StoreEntitySet="adult">
+                <ScalarProperty Name="member_no" ColumnName="member_no" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="zip" ColumnName="zip" />
+                <ScalarProperty Name="phone_no" ColumnName="phone_no" />
+                <ScalarProperty Name="expr_date" ColumnName="expr_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="libraryModel.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="libraryModel.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="libraryModel.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="libraryModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Hometown" ColumnName="Hometown" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="copies">
+            <EntityTypeMapping TypeName="libraryModel.copy">
+              <MappingFragment StoreEntitySet="copy">
+                <ScalarProperty Name="isbn" ColumnName="isbn" />
+                <ScalarProperty Name="copy_no" ColumnName="copy_no" />
+                <ScalarProperty Name="title_no" ColumnName="title_no" />
+                <ScalarProperty Name="on_loan" ColumnName="on_loan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="items">
+            <EntityTypeMapping TypeName="libraryModel.item">
+              <MappingFragment StoreEntitySet="item">
+                <ScalarProperty Name="isbn" ColumnName="isbn" />
+                <ScalarProperty Name="title_no" ColumnName="title_no" />
+                <ScalarProperty Name="translation" ColumnName="translation" />
+                <ScalarProperty Name="cover" ColumnName="cover" />
+                <ScalarProperty Name="loanable" ColumnName="loanable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="juveniles">
+            <EntityTypeMapping TypeName="libraryModel.juvenile">
+              <MappingFragment StoreEntitySet="juvenile">
+                <ScalarProperty Name="member_no" ColumnName="member_no" />
+                <ScalarProperty Name="adult_member_no" ColumnName="adult_member_no" />
+                <ScalarProperty Name="birth_date" ColumnName="birth_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="loans">
+            <EntityTypeMapping TypeName="libraryModel.loan">
+              <MappingFragment StoreEntitySet="loan">
+                <ScalarProperty Name="isbn" ColumnName="isbn" />
+                <ScalarProperty Name="copy_no" ColumnName="copy_no" />
+                <ScalarProperty Name="title_no" ColumnName="title_no" />
+                <ScalarProperty Name="member_no" ColumnName="member_no" />
+                <ScalarProperty Name="out_date" ColumnName="out_date" />
+                <ScalarProperty Name="due_date" ColumnName="due_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="loanhists">
+            <EntityTypeMapping TypeName="libraryModel.loanhist">
+              <MappingFragment StoreEntitySet="loanhist">
+                <ScalarProperty Name="isbn" ColumnName="isbn" />
+                <ScalarProperty Name="copy_no" ColumnName="copy_no" />
+                <ScalarProperty Name="out_date" ColumnName="out_date" />
+                <ScalarProperty Name="title_no" ColumnName="title_no" />
+                <ScalarProperty Name="member_no" ColumnName="member_no" />
+                <ScalarProperty Name="due_date" ColumnName="due_date" />
+                <ScalarProperty Name="in_date" ColumnName="in_date" />
+                <ScalarProperty Name="fine_assessed" ColumnName="fine_assessed" />
+                <ScalarProperty Name="fine_paid" ColumnName="fine_paid" />
+                <ScalarProperty Name="fine_waived" ColumnName="fine_waived" />
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="members">
+            <EntityTypeMapping TypeName="libraryModel.member">
+              <MappingFragment StoreEntitySet="member">
+                <ScalarProperty Name="member_no" ColumnName="member_no" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="middleinitial" ColumnName="middleinitial" />
+                <ScalarProperty Name="photograph" ColumnName="photograph" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="reservations">
+            <EntityTypeMapping TypeName="libraryModel.reservation">
+              <MappingFragment StoreEntitySet="reservation">
+                <ScalarProperty Name="isbn" ColumnName="isbn" />
+                <ScalarProperty Name="member_no" ColumnName="member_no" />
+                <ScalarProperty Name="log_date" ColumnName="log_date" />
+                <ScalarProperty Name="remarks" ColumnName="remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="titles">
+            <EntityTypeMapping TypeName="libraryModel.title">
+              <MappingFragment StoreEntitySet="title">
+                <ScalarProperty Name="title_no" ColumnName="title_no" />
+                <ScalarProperty Name="title1" ColumnName="title" />
+                <ScalarProperty Name="author" ColumnName="author" />
+                <ScalarProperty Name="synopsis" ColumnName="synopsis" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="libraryModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

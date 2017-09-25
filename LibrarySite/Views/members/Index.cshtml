@@ -1,0 +1,27 @@
+﻿@model PagedList.IPagedList<LibrarySite.Models.member>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Members";
+}
+
+<h2>Members</h2>
+
+@*@using (Ajax.BeginForm(
+    new AjaxOptions
+    {
+        HttpMethod = "get",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "memberList"
+    }))*@
+
+<form method="get" action="@Url.Action("Index")"
+      data-lib-ajax="true" data-lib-target="#memberList">
+
+    <label for="lastname">Last Name Search for: </label>
+    <input type="search" name="searchTerm" value="@Session["searchTerm"]" data-lib-autocomplete="@Url.Action("Autocomplete")" />&nbsp;
+    @Html.DropDownList("pageSize", DefaultValues.ItemsPerPageList, new { @id = "ItemsPerPageList"}) per page
+    <input type="submit" value="Go" />
+</form>
+
+@Html.Partial("_members", Model)

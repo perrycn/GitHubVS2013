@@ -1,0 +1,42 @@
+﻿@model LibrarySite.Models.title
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>title</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.title1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.title1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.author)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.author)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.synopsis)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.synopsis)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.title_no }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,123 @@
+﻿@model LibrarySite.Models.member
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Member</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.lastname)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.lastname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.firstname)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.firstname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.middleinitial)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.middleinitial)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.member_no)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.member_no)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.member_type)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.member_type)
+        </dd>
+        @if (Model.member_type == "Adult")
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.adult.street)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.adult.street)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.adult.city)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.adult.city)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.adult.state)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.adult.state)
+            </dd>
+            
+            <dt>
+                @Html.DisplayNameFor(model => model.adult.zip)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.adult.zip)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.adult.phone_no)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.adult.phone_no)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.adult.expr_date)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.adult.expr_date)
+            </dd>
+        }
+        else
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.juvenile.adult_member_no)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.juvenile.adult.member.firstname, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DisplayFor(model => model.juvenile.adult.member.middleinitial, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DisplayFor(model => model.juvenile.adult.member.lastname, new { htmlAttributes = new { @class = "form-control" } })
+                &#40;@Html.DisplayFor(model => model.juvenile.adult_member_no, new { htmlAttributes = new { @class = "form-control" } })&#41;
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.juvenile.birth_date)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.juvenile.birth_date)
+            </dd>
+        }
+         
+    </dl>
+</div>
+<p>
+    @if (Model.member_type == "Adult")
+    {
+        @Html.ActionLink("Edit", "EditAdult", new { id = Model.member_no })
+    }
+    else
+    {
+        @Html.ActionLink("Edit", "EditJuvenile", new { id = Model.member_no })
+    } |
+    @Html.ActionLink("Back to List", "Index", new { searchTerm = Session["searchTerm"], page = Session["page"], pageSize = Session["pageSize"] })
+</p>
